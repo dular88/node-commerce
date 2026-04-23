@@ -3,7 +3,7 @@ import CustomErrorHandler from "../../services/CustomErrorHandler.js";
 import { RefreshToken, User } from "../../models/index.js";
 import JwtService from '../../services/JwtService.js';
 import bcrypt from 'bcrypt';
-import { REFRESH_SECRET } from "../../config/index.js";
+import CONFIG from "../../config/index.js";
 
 const registerController = {
        async register(req, res, next){
@@ -36,6 +36,7 @@ const registerController = {
                 // Hash Password
         const {name, email, password} = req.body;
         const hashedPassword = await bcrypt.hash(password, 10);
+        const REFRESH_SECRET = CONFIG.REFRESH_SECRET;
        
         
         const user = new User ({
